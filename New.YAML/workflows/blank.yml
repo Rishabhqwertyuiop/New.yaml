@@ -1,0 +1,19 @@
+name: Create Directory on VM
+
+on:
+  workflow_dispatch:   # Allows you to trigger manually from GitHub Actions tab
+
+jobs:
+  create-directory:
+    runs-on: centos-latest
+
+    steps:
+    - name: Create directory on VM
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        key: ${{ secrets.VM_SSH_KEY }}
+        script: |
+          mkdir -p ~/my_new_directory
+          echo "✅ Directory created on VM: ~/my_new_directory"
